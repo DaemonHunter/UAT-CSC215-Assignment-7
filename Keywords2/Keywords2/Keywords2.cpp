@@ -2,8 +2,10 @@
 // Josh Sharrer
 
 #include <iostream>
-#include <cstdlib>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
+
 
 using namespace std;
 
@@ -17,11 +19,11 @@ int main()
 	printf("________________________________________\n\n");
 	
 	// Ask the recruit to login using thier name
-	string recruitName;
+	char recruitName[100];
 	printf("Hello Recruit. What is your name?\n");
 	
 	// Hold the recruit's name in a var, and address them by it throughout the simulation.
-	cin >> recruitName;
+	cin.getline(recruitName,sizeof(recruitName));
 	
 	// Display an overview of what Keywords II is to the recruit 
 	cout << "\n\nHello " << recruitName << "!" << endl;
@@ -32,37 +34,55 @@ int main()
 	cout << "current code decryption programs have not been successful against.  At the CIA they are developing a new code breaking" << endl;
 	cout << "team which relies on human expertise to detect these low tech scrambled keywords. We are turning back the clock with" << endl;
 	cout << "this new team of human code breakers.\n" << endl;
-	// Display an directions to the recruit on how to use Keywords
+	
+	// Display directions to the recruit on how to use Keywords
+	cout << "Instructions:\n" << endl;
+
 	// Create a collection of 10 words you had wrote down manually
 	enum fields { WORD, HINT, NUM_FIELDS };
 	const int NUM_WORDS = 10;
 	const string WORDS[NUM_WORDS][NUM_FIELDS] =
 	{
-		{"test1", "Test Hint"},
-		{"test2", "Test Hint"},
-		{"test3", "Test Hint"},
-		{"test4", "Test Hint"},
-		{"test5", "Test Hint"},
-		{"test6", "Test Hint"},
-		{"test7", "Test Hint"},
-		{"test8", "Test Hint"},
-		{"test9", "Test Hint"},
-		{"test10", "Test Hint"},
+		{"keyword", "A word or identifier that has a particular meaning to the programming language."},
+		{"encryption", "A method of scrambling the data so that it is unreadable without the key."},
+		{"scramble", "The act of making (something) jumbled or muddled."},
+		{"training", "The action of teaching a person or animal a particular skill or type of behavior."},
+		{"simulation", "The action of pretending."},
+		{"cryptography", "The practice and study of techniques for secure communication in the presence of third parties called adversaries."},
+		{"code", "A system of rules to convert information."},
+		{"recruit", "A person newly enlisted, and not yet fully trained."},
+		{"transmission", "The process of sending and propagating an analogue or digital information signal."},
+		{"decode", "The reverse process of encoding, converting code symbols back into a form that the recipient understand, such as English or Spanish."},
 	};
 
 	// Create an int var to count the number of simulations being run starting at 1
-	int GameNumber = 0;
+	int simNumber = 0;
 	   
 	// Display the simulation # is staring to the recruit. 
-	GameNumber++;
-	cout << "Starting Game # " << GameNumber << ".\n" << endl;       
+	simNumber++;
+	cout << "Starting Simulation # " << simNumber << ".\n" << endl;       
+	
 	// Pick new 3 random words from your collection as the secret code word the recruit has to guess. 
+	for (int i = 0; i < 3; ++i)
+	{
+		int words = (rand() % NUM_WORDS);
+		string theWord = WORDS[words][WORD];  // word to guess
+		string theHint = WORDS[words][HINT];  // hint for word
+		string jumble = theWord;  // jumbled version of word
+		int length = jumble.size();
 
+		int index1 = (rand() % length);
+		int index2 = (rand() % length);
+		char temp = jumble[index1];
+		jumble[index1] = jumble[index2];
+		jumble[index2] = temp;
 	
 	// While recruit hasn’t made too many incorrect guesses and hasn’t guessed the secret word
-
+		
+	
 	//     Tell recruit how many incorrect guesses he or she has left
 
+	
 	//     Show recruit the letters he or she has guessed
 
 	//     Show player how much of the secret word he or she has guessed
@@ -108,5 +128,5 @@ int main()
 	//     Display End of Simulations to the recruit
 
 	//     Pause the Simulation with press any key to continue
-	system("PAUSE");
+	system("pause");
 }
